@@ -3,23 +3,23 @@ import tkinter.font as font
 
 langs=['EN', 'PT']
 
-def rule_of_three(x1, x2, y1):
-    try:
-        x1, x2, y1 = float(x1), float(x2), float(y1)
-        y2=round((x2*y1)/x1, 5)
-        if y2.is_integer():
-            return int(y2)
-        else:
-            return y2
-    except:
-        return 'X'
-
 class Result:
     def __init__(self, window):
         self.value=0
         self.y2=Label(window, text='X', font=answer_font)
         self.y2.grid(row=4, column=4)
         window.after(50, self.refreshLabel)
+        
+    def rule_of_three(self, x1, x2, y1):
+        try:
+            x1, x2, y1 = float(x1), float(x2), float(y1)
+            y2=round((x2*y1)/x1, 5)
+            if y2.is_integer():
+                return int(y2)
+            else:
+                return y2
+        except:
+            return 'X'
         
     def refreshLabel(self):
         global x1, x2, y1
@@ -30,7 +30,7 @@ class Result:
         
         self.isNumber()
         
-        self.value=rule_of_three(self.x1_value, self.x2_value, self.y1_value)
+        self.value=self.rule_of_three(self.x1_value, self.x2_value, self.y1_value)
         
         self.y2.config(text=self.value)
         
