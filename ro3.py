@@ -1,18 +1,19 @@
 from tkinter import *
+import tkinter.font as font
 
 langs=['EN', 'PT']
 
 def rule_of_three(x1, x2, y1):
-    if x1!=0 and (type(x1)!=None) and (x1!='' and x2!='' and y1!=''):
-        x1, x2, y1 = int(x1), int(x2), int(y1)
-        return (x2*y1)/x1
-    else:
+    try:
+        x1, x2, y1 = float(x1), float(x2), float(y1)
+        return round((x2*y1)/x1, 5)
+    except:
         return 'X'
 
 class Result:
     def __init__(self, window):
         self.value=0
-        self.y2=Label(window, text='X')
+        self.y2=Label(window, text='X', font=default_font)
         self.y2.grid(row=4, column=4)
         window.after(50, self.refreshLabel)
         
@@ -33,23 +34,26 @@ class Result:
         
     def isNumber(self):
         try:
-            self.x1_try=int(self.x1_value)
+            self.x1_try=float(self.x1_value)
         except:
             self.x1_value=''
             
         try:
-            self.x2_try=int(self.x2_value)
+            self.x2_try=float(self.x2_value)
         except:
             self.x2_value=''
             
         try:
-            self.y1_try=int(self.y1_value)
+            self.y1_try=float(self.y1_value)
         except:
             self.y1_value=''
 
 if __name__=='__main__':
     window = Tk()
+    window.resizable(False, False)
     window.title("Rule of three calculator")
+    
+    default_font=font.Font(family='Bahnschrift')
 
     n=[5, 5]
 
@@ -60,13 +64,13 @@ if __name__=='__main__':
     blankSpace1=Label(window, text="           ")
     blankSpace2=Label(window, text="           ")
 
-    x1=Entry(window)
-    x2=Entry(window)
-    y1=Entry(window)
+    x1=Entry(window, font=default_font, justify='center')
+    x2=Entry(window, font=default_font, justify='center')
+    y1=Entry(window, font=default_font, justify='center')
 
-    isToUpper=Label(window, text="is to")
-    asIs=Label(window, text="as")
-    isToLower=Label(window, text="is to")
+    isToUpper=Label(window, text="is to", font=default_font)
+    asIs=Label(window, text="as", font=default_font)
+    isToLower=Label(window, text="is to", font=default_font)
 
     blankColumn1.grid(row=0, column=0, rowspan=5)
     blankColumn2.grid(row=0, column=5, rowspan=5)
