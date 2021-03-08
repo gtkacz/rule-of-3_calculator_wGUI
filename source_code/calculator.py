@@ -1,5 +1,7 @@
 from tkinter import *
 import tkinter.font as font
+from fractions import Fraction
+import re
 
 langs=['EN', 'PT']
 
@@ -29,12 +31,38 @@ class Result:
         self.y1_value=y1.get()
         
         self.isNumber()
+        self.fractionToFloat()
         
         self.value=self.rule_of_three(self.x1_value, self.x2_value, self.y1_value)
         
         self.y2.config(text=self.value)
         
         window.after(50, self.refreshLabel)
+        
+    def fractionToFloat(self):
+        try:
+            self.values=self.x1_value.split('/')
+            self.isfraction=len(self.values) == 2 and all(i.isdigit() for i in self.values)
+            if self.isfraction==True:
+                self.x1_value=Fraction(self.x1_value)
+        except:
+            self.x1_value=''
+            
+        try:
+            self.values=self.x2_value.split('/')
+            self.isfraction=len(self.values) == 2 and all(i.isdigit() for i in self.values)
+            if self.isfraction==True:
+                self.x2_value=Fraction(self.x2_value)
+        except:
+            self.x2_value=''
+            
+        try:
+            self.values=self.y1_value.split('/')
+            self.isfraction=len(self.values) == 2 and all(i.isdigit() for i in self.values)
+            if self.isfraction==True:
+                self.y1_value=Fraction(self.y1_value)
+        except:
+            self.y1_value=''
         
     def isNumber(self):
         try:
@@ -59,8 +87,6 @@ if __name__=='__main__':
     
     default_font=font.Font(family='Calibri')
     answer_font=font.Font(family='Calibri', weight='bold')
-
-    n=[5, 5]
 
     blankColumn1=Label(window, text="           ")
     blankColumn2=Label(window, text="           ")
@@ -89,10 +115,6 @@ if __name__=='__main__':
     isToUpper.grid(row=2, column=3)
     asIs.grid(row=3, column=3)
     isToLower.grid(row=4, column=3)
-
-    #x1.insert(0, '1')
-    #x2.insert(0, '1')
-    #y1.insert(0, '1')
     
     result=Result(window)
 
