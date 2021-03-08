@@ -3,27 +3,38 @@ from tkinter import *
 langs=['EN', 'PT']
 
 def rule_of_three(x1, x2, y1):
-    return (x2*y1)/x1
+    if x1!=0 and (type(x1)!=None) and (x1!='' and x2!='' and y1!=''):
+        x1, x2, y1 = int(x1), int(x2), int(y1)
+        return (x2*y1)/x1
+    else:
+        return 'X'
 
 class Result:
     def __init__(self, window):
         self.value=0
-        self.y2=Label(window, text='x')
+        self.y2=Label(window, text='X')
         self.y2.grid(row=4, column=4)
-        window.after(500, self.refreshLabel)
+        window.after(50, self.refreshLabel)
         
     def refreshLabel(self):
         global x1, x2, y1
         
-        x1_value=int(x1.get())
-        x2_value=int(x2.get())
-        y1_value=int(y1.get())
+        x1_value=x1.get()
+        x2_value=x2.get()
+        y1_value=y1.get()
         
         self.value=rule_of_three(x1_value, x2_value, y1_value)
         
         self.y2.config(text=self.value)
         
-        window.after(500, self.refreshLabel)
+        window.after(50, self.refreshLabel)
+        
+    def isNumber(self):
+        global x1, x2, y1
+        
+        base_x1=x1
+        base_x2=x2
+        base_y1=y1
 
 if __name__=='__main__':
     window = Tk()
@@ -38,9 +49,9 @@ if __name__=='__main__':
     blankSpace1=Label(window, text="           ")
     blankSpace2=Label(window, text="           ")
 
-    x1=(Entry(window))
-    x2=(Entry(window))
-    y1=(Entry(window))
+    x1=Entry(window)
+    x2=Entry(window)
+    y1=Entry(window)
 
     isToUpper=Label(window, text="is to")
     asIs=Label(window, text="as")
@@ -59,9 +70,9 @@ if __name__=='__main__':
     asIs.grid(row=3, column=3)
     isToLower.grid(row=4, column=3)
 
-    x1.insert(0, '1')
-    x2.insert(0, '1')
-    y1.insert(0, '1')
+    #x1.insert(0, '1')
+    #x2.insert(0, '1')
+    #y1.insert(0, '1')
     
     result=Result(window)
 
