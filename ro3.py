@@ -6,14 +6,18 @@ langs=['EN', 'PT']
 def rule_of_three(x1, x2, y1):
     try:
         x1, x2, y1 = float(x1), float(x2), float(y1)
-        return round((x2*y1)/x1, 5)
+        y2=round((x2*y1)/x1, 5)
+        if y2.is_integer():
+            return int(y2)
+        else:
+            return y2
     except:
         return 'X'
 
 class Result:
     def __init__(self, window):
         self.value=0
-        self.y2=Label(window, text='X', font=default_font)
+        self.y2=Label(window, text='X', font=answer_font)
         self.y2.grid(row=4, column=4)
         window.after(50, self.refreshLabel)
         
@@ -53,7 +57,8 @@ if __name__=='__main__':
     window.resizable(False, False)
     window.title("Rule of three calculator")
     
-    default_font=font.Font(family='Bahnschrift')
+    default_font=font.Font(family='Calibri')
+    answer_font=font.Font(family='Calibri', weight='bold')
 
     n=[5, 5]
 
