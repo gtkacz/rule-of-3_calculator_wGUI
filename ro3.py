@@ -19,22 +19,33 @@ class Result:
     def refreshLabel(self):
         global x1, x2, y1
         
-        x1_value=x1.get()
-        x2_value=x2.get()
-        y1_value=y1.get()
+        self.x1_value=x1.get()
+        self.x2_value=x2.get()
+        self.y1_value=y1.get()
         
-        self.value=rule_of_three(x1_value, x2_value, y1_value)
+        self.isNumber()
+        
+        self.value=rule_of_three(self.x1_value, self.x2_value, self.y1_value)
         
         self.y2.config(text=self.value)
         
         window.after(50, self.refreshLabel)
         
     def isNumber(self):
-        global x1, x2, y1
-        
-        base_x1=x1
-        base_x2=x2
-        base_y1=y1
+        try:
+            self.x1_try=int(self.x1_value)
+        except:
+            self.x1_value=''
+            
+        try:
+            self.x2_try=int(self.x2_value)
+        except:
+            self.x2_value=''
+            
+        try:
+            self.y1_try=int(self.y1_value)
+        except:
+            self.y1_value=''
 
 if __name__=='__main__':
     window = Tk()
