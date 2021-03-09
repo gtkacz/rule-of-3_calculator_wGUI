@@ -31,7 +31,6 @@ class Result:
         self.y1_value=y1.get()
         
         self.isNumber()
-        self.fractionToFloat()
         
         self.value=self.rule_of_three(self.x1_value, self.x2_value, self.y1_value)
         
@@ -39,30 +38,8 @@ class Result:
         
         window.after(50, self.refreshLabel)
         
-    def fractionToFloat(self):
-        try:
-            self.values=self.x1_value.split('/')
-            self.isfraction=len(self.values) == 2 and all(i.isdigit() for i in self.values)
-            if self.isfraction==True:
-                self.x1_value=Fraction(self.x1_value)
-        except:
-            self.x1_value=''
-            
-        try:
-            self.values=self.x2_value.split('/')
-            self.isfraction=len(self.values) == 2 and all(i.isdigit() for i in self.values)
-            if self.isfraction==True:
-                self.x2_value=Fraction(self.x2_value)
-        except:
-            self.x2_value=''
-            
-        try:
-            self.values=self.y1_value.split('/')
-            self.isfraction=len(self.values) == 2 and all(i.isdigit() for i in self.values)
-            if self.isfraction==True:
-                self.y1_value=Fraction(self.y1_value)
-        except:
-            self.y1_value=''
+    def fractionToFloat(self, string):
+        pass
         
     def isNumber(self):
         try:
