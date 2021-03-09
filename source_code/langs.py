@@ -10,3 +10,7 @@ def fractionToFloat(string):
             
             
 print(fractionToFloat('125/25'))
+
+class Settings():
+    def __init__(self):
+        pass
